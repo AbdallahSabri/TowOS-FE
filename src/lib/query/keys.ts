@@ -8,6 +8,11 @@
 //   jobs.list(filters)    -> ['jobs', 'list', filters]
 //   jobs.detail(id)       -> ['jobs', 'detail', id]
 //
-// Phase 0 has no queries yet — Phase 1 adds the `jobs`, `drivers`, etc.
-// entries here as the board and job screens land.
-export const queryKeys = {} as const;
+// Phase 0 has no jobs/drivers queries yet — Phase 1 adds those entries
+// here as the board and job screens land. `auth.me()` is Phase 0's one
+// real query: the (app) route group's session guard (FE-SPEC.md §10).
+export const queryKeys = {
+  auth: {
+    me: () => ["auth", "me"] as const,
+  },
+} as const;
