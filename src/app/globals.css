@@ -10,6 +10,42 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Type scale, spacing scale, and radii (FE-SPEC.md §8) are deliberately
+     NOT overridden here — Tailwind's default scales already are a token
+     layer (the text-sm/base/lg, p and gap spacing steps, rounded corner
+     steps), so using them consistently instead of ad hoc pixel values
+     satisfies §8 without inventing a parallel scale nothing in this
+     design calls for. */
+
+  /* Job status colors (FE-SPEC.md §8, §13 lifecycle list). Domain values
+     are snake_case (src/styles/tokens.ts); these are kebab-case per
+     Tailwind's utility-naming convention — see jobStatusColorClass for
+     the mapping. Each generates bg-/text-/border-status-* utilities. */
+  --color-status-draft: #94a3b8;
+  --color-status-open: #2563eb;
+  --color-status-assigned: #7c3aed;
+  --color-status-en-route: #0891b2;
+  --color-status-on-scene: #d97706;
+  --color-status-complete: #16a34a;
+  --color-status-cancelled: #64748b;
+  --color-status-expired: #b91c1c;
+  --color-status-goa: #c2410c;
+  --color-status-unable-to-complete: #dc2626;
+
+  /* Priority treatment. PLACEHOLDER values — blocked on FE-SPEC.md §15
+     Q12 ([NEEDS TONY]). Only high/normal/low are confirmed; changing what
+     each renders as touches this block and src/styles/tokens.ts only. */
+  --color-priority-high: #dc2626;
+  --color-priority-normal: #2563eb;
+  --color-priority-low: #64748b;
+
+  /* Source badge treatment (FE-SPEC.md §8). */
+  --color-source-manual: #64748b;
+  --color-source-agero: #0e7490;
+
+  /* Past-due state, rendered red (FE-SPEC.md §9.1). */
+  --color-past-due: #dc2626;
 }
 
 @media (prefers-color-scheme: dark) {
