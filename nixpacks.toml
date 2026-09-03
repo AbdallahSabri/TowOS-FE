@@ -1,0 +1,21 @@
+# Coolify build config (FE-SPEC.md §12, CLAUDE.md: Coolify, Nixpacks build,
+# no Dockerfile — ADR-010). Node version pinned explicitly per CLAUDE.md
+# ("Set the Node version explicitly in the Nixpacks configuration so the
+# build does not drift") rather than left to Nixpacks' auto-detection.
+#
+# The build phase gates on typecheck + lint + test before `next build` —
+# each cmd runs in order and the phase stops at the first failure, so a
+# broken build never reaches `next start` (§12: "A failure blocks the
+# deploy").
+
+[phases.setup]
+nixPkgs = ["nodejs_24"]
+
+[phases.install]
+cmds = ["npm ci"]
+
+[phases.build]
+cmds = ["npm run typecheck", "npm run lint", "npm run test", "npm run build"]
+
+[start]
+cmd = "npm run start"
